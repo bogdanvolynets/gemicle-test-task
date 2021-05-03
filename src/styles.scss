@@ -10,8 +10,28 @@
 html { 
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    line-height: 1.6;
 }
 
-h1, h2, h3 {
+.container { 
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 90px auto;
+ }
+
+h1, h2, h3, strong {
     font-weight: 500;
  }
+
+.btn {
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 500;
+    padding: 9px 24px;
+    color: #fff;
+    background-color: #0074b7;
+    border: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+}

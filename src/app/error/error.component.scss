@@ -1,0 +1,16 @@
+.error-page {
+    text-align: center;
+
+    h1 { 
+        font-size: 160px;
+        line-height: normal;
+    }
+
+    p {
+        font-size: 32px;
+        &:last-child { 
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    }
+}

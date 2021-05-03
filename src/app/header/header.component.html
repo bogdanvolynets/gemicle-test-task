@@ -1,4 +1,4 @@
 <header class="top-bar">
-    <p>{{ clock() }}</p>
-    <p>Marked users: {{ userCounter }}</p>
+    <p>{{ getDate() | date:'HH:mm:ss' }}</p>
+    <p>Users Added: {{ userCounter }}</p>
 </header>

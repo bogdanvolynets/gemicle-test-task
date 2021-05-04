@@ -6,14 +6,22 @@ import {Component, OnInit} from '@angular/core'
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    userCounter = 0;
+
+    constructor() { }
 
     getDate(): Date {
       const date = new Date();
       return date;
     }
 
-    constructor() { }
+    usersCounter() { 
+      const addedUsers = JSON.parse(localStorage.getItem('addedUsers')!)
+      if(addedUsers === null) {
+        return 0;
+      } else {
+        return addedUsers.length;
+      }
+  };
 
   ngOnInit(): void {
     setInterval(() => {

@@ -7,9 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
 
+  usersUrl: string = 'https://randomuser.me/api/?inc=login,picture,location,email,gender,dob,phone,name&password=number,8-12&noinfo&results=20'
+
   constructor(private http: HttpClient) { }
 
   getUsersData(): Observable<any> {
-    return this.http.get<any>('https://randomuser.me/api/?inc=login,picture,location,email,gender,dob,phone,name&password=number,8-12&noinfo&results=20');
+    return this.http.get<any>(this.usersUrl);
   }
 }

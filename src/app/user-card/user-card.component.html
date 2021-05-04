@@ -1,13 +1,37 @@
-<app-tabs></app-tabs>
+<div class="tabs">
+    <button class="btn tabs__btn" [ngClass]="{'active': showAll}" (click)='showAll = true'>Show all users</button>
+    <button class="btn tabs__btn" [ngClass]="{'active': !showAll}" (click)='showAll = false; manageAddedUsers()'>Show added users</button>
+</div>
+
+<div class="user-filter">
+    <input type="text" [(ngModel)]="filterUsers">
+    <label>Search user by name</label>
+</div>
+
 <div class="cards-container">
-    <div *ngFor="let user of users" class="card">
+    <div *ngFor="let user of users | filter:filterUsers" class="card">
         <img [src]="user.picture.large" [alt]="user.name.first + ' ' + user.name.last" class="card__avatar">
         <p class="card__text">
             <strong>Name: </strong> <a [title]="user.name.first + ' ' + user.name.last" [routerLink]="['/user', user.login.password]">{{ user.name.first + ' ' + user.name.last }} </a>
         </p>
         <p class="card__text"><strong>ID:</strong> {{ user.login.password }}</p>
-        <button class="btn card__btn" (click)="storeAddedUser(user);" [ngClass]="user.dateAdded ? 'remove' : 'add'" [ngStyle]="{'background-color': user.dateAdded ? '#e03333' : '#0074b7'}">Manage User</button>
+        <button class="btn card__btn" (click)="addDate(user);" [ngClass]="user.dateAdded ? 'remove' : 'add'" [ngStyle]="{'background-color': user.dateAdded ? '#e03333' : '#0074b7'}">Manage User</button>
         <p *ngIf="user.dateAdded">{{ user.dateAdded | date:'HH:mm:ss' }}</p>
     </div>
-    <button class="btn btn-loader" (click)="loadMoreData()">See More</button>
 </div>
+
+<button *ngIf="showAll" class="btn btn-loader" (click)="loadMoreData()">See More</button>
+
+<ng-template #showAdded>
+    <div class="cards-container">
+        <div *ngFor="let user of addedUsers | filter:filterUsers" class="card">
+            <img [src]="user.picture.large" [alt]="user.name.first + ' ' + user.name.last" class="card__avatar">
+            <p class="card__text">
+                <strong>Name: </strong> <a [title]="user.name.first + ' ' + user.name.last" [routerLink]="['/user', user.login.password]">{{ user.name.first + ' ' + user.name.last }} </a>
+            </p>
+            <p class="card__text"><strong>ID:</strong> {{ user.login.password }}</p>
+            <button class="btn card__btn" (click)="addDate(user);" [ngClass]="user.dateAdded ? 'remove' : 'add'" [ngStyle]="{'background-color': user.dateAdded ? '#e03333' : '#0074b7'}">Manage User</button>
+            <p *ngIf="user.dateAdded">{{ user.dateAdded | date:'HH:mm:ss' }}</p>
+        </div>
+    </div>
+</ng-template>

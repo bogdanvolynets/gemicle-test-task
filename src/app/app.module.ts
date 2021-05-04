@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserCardComponent } from './user-card/user-card.component';
-import { TabsComponent } from './tabs/tabs.component'
 import { UsersService } from './users.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -19,14 +20,15 @@ import { ErrorComponent } from './error/error.component';
     HeaderComponent,
     FooterComponent,
     UserCardComponent,
-    TabsComponent,
     UserProfileComponent,
-    ErrorComponent
+    ErrorComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: UserCardComponent },
       { path: 'user/:userId', component: UserProfileComponent },

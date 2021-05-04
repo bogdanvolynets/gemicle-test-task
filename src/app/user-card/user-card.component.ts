@@ -8,14 +8,21 @@ import { UsersService } from '../users.service';
 })
 export class UserCardComponent implements OnInit {
 
+  // array with all users
   users: any[] = []
 
+  // array with users that have been marked
   addedUsers: any[] = []
+
+  // tabs option
+  showAll: boolean = true;
+
+  filterUsers: string = ''
 
   //if we have users data saved in localStorage - get it
   //if we don't - get it from API, place in localStorage 
   //and then place it in users array that we use to display it on screen
-  manageUsersData() {
+  manageUsersData(): void {
     if (localStorage.getItem('users') === null) {
       //subscribe to data from Observable
       this._usersService.getUsersData()
@@ -28,24 +35,35 @@ export class UserCardComponent implements OnInit {
   }
 }
 
+  manageAddedUsers(): void {
+    this.addedUsers = this.users.filter(user => user.dateAdded);
+    localStorage.setItem('addedUsers', JSON.stringify(this.addedUsers));
+  }
+
+  //save users array to local storage
+  saveUsersLocally(): void {
+    localStorage.setItem('users', JSON.stringify(this.users));
+  }
+
   //get new users from api - push them into array and local storage
   loadMoreData(): void {
     this._usersService.getUsersData()
     .subscribe(data => {
-      this.users.push(...data.results)
-      localStorage.setItem('users', JSON.stringify(this.users))
+      this.users.push(...data.results);
+      this.saveUsersLocally();
     });
   }
 
-  storeAddedUser(user: any) {
+  //add date on buttons click
+  //if user already have date property - remove it
+  addDate(user: any): void {
     if (user.dateAdded) {
       delete user.dateAdded;
     } else {
     user.dateAdded = new Date();
   }
-    // this.addedUsers.push(user);
-    // localStorage.setItem('addedUser', JSON.stringify(user));
-    console.log(this.addedUsers);
+    this.saveUsersLocally();
+    this.manageAddedUsers();
   }
 
   constructor(private _usersService: UsersService) {

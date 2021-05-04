@@ -6,7 +6,8 @@
             <strong>Name: </strong> <a [title]="user.name.first + ' ' + user.name.last" [routerLink]="['/user', user.login.password]">{{ user.name.first + ' ' + user.name.last }} </a>
         </p>
         <p class="card__text"><strong>ID:</strong> {{ user.login.password }}</p>
-        <button class="btn card__btn">Add User</button>
+        <button class="btn card__btn" (click)="storeAddedUser(user);" [ngClass]="user.dateAdded ? 'remove' : 'add'" [ngStyle]="{'background-color': user.dateAdded ? '#e03333' : '#0074b7'}">Manage User</button>
+        <p *ngIf="user.dateAdded">{{ user.dateAdded | date:'HH:mm:ss' }}</p>
     </div>
     <button class="btn btn-loader" (click)="loadMoreData()">See More</button>
 </div>

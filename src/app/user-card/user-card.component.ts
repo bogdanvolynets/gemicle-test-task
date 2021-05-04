@@ -10,6 +10,8 @@ export class UserCardComponent implements OnInit {
 
   users: any[] = []
 
+  addedUsers: any[] = []
+
   //if we have users data saved in localStorage - get it
   //if we don't - get it from API, place in localStorage 
   //and then place it in users array that we use to display it on screen
@@ -33,6 +35,17 @@ export class UserCardComponent implements OnInit {
       this.users.push(...data.results)
       localStorage.setItem('users', JSON.stringify(this.users))
     });
+  }
+
+  storeAddedUser(user: any) {
+    if (user.dateAdded) {
+      delete user.dateAdded;
+    } else {
+    user.dateAdded = new Date();
+  }
+    // this.addedUsers.push(user);
+    // localStorage.setItem('addedUser', JSON.stringify(user));
+    console.log(this.addedUsers);
   }
 
   constructor(private _usersService: UsersService) {

@@ -15,6 +15,7 @@ html {
 
 .container { 
     max-width: 1200px;
+    min-height: 100vh;
     padding: 0 20px;
     margin: 90px auto;
  }
@@ -22,6 +23,11 @@ html {
 h1, h2, h3, strong {
     font-weight: 500;
  }
+
+a {
+    color: #0074b7;
+    &:hover { text-decoration: none; }
+}
 
 .btn {
     font-family: 'Roboto';

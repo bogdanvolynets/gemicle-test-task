@@ -50,7 +50,8 @@ export class UserCardComponent implements OnInit {
     this._usersService.getUsersData()
     .subscribe(data => {
       this.users.push(...data.results);
-      // this.saveUsersLocally();
+      this.saveUsersLocally();
+      this.showAll = true;
     });
   }
 

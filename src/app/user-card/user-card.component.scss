@@ -79,3 +79,18 @@
         transform: scale(1.1);
     }
 }
+
+@media only screen and (max-width: 420px) {
+    .tabs {
+        &__btn {
+            width: 100%;
+            border-radius: 8px;
+            &:first-child {
+                margin-bottom: 15px;;
+            }
+        }
+    }
+    .cards-container .card__avatar {
+        float: none;
+    }
+}

@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<button *ngIf="showAll" class="btn btn-loader" (click)="loadMoreData()">See More</button>
+<button *ngIf="showAll" class="btn btn-loader" (click)="showAll = false; loadMoreData();">See More</button>
 
 <ng-template #showAdded>
     <div class="cards-container">

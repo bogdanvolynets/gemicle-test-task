@@ -8,7 +8,7 @@
     <label>Search user by name</label>
 </div>
 
-<div class="cards-container">
+<div *ngIf="showAll; else showAdded" class="cards-container">
     <div *ngFor="let user of users | filter:filterUsers" class="card">
         <img [src]="user.picture.large" [alt]="user.name.first + ' ' + user.name.last" class="card__avatar">
         <p class="card__text">
